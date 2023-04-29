@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
+import org.github.chezecakes.items.KhaakBeadsItem;
 import org.github.chezecakes.items.SajdegahItem;
 import org.github.chezecakes.items.TasbihItem;
 import org.slf4j.Logger;
@@ -20,6 +21,7 @@ public class HalalCraft implements ModInitializer {
 
 	public static final Item TASBIH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "tasbih"), new TasbihItem(new FabricItemSettings()));
 	public static final Item SAJDEGAH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "sajdegah"), new SajdegahItem(new FabricItemSettings()));
+	public static final Item KHAAK_BEADS = Registry.register(Registries.ITEM, new Identifier("halalcraft", "khaak_beads"), new KhaakBeadsItem(new FabricItemSettings()));
 
 	private static final ItemGroup HALALCRAFT_GROUP = FabricItemGroup.builder(new Identifier("halalcraft", "halalcraft"))
 			.icon(() -> new ItemStack(TASBIH))
@@ -31,6 +33,7 @@ public class HalalCraft implements ModInitializer {
 		ItemGroupEvents.modifyEntriesEvent(HALALCRAFT_GROUP).register(content -> {
 			content.add(TASBIH);
 			content.add(SAJDEGAH);
+			content.add(KHAAK_BEADS);
 		});
 	}
 }

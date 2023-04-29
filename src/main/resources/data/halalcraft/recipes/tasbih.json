@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " B ",
+    "BSB",
+    " BG"
+  ],
+  "key": {
+    "B": {
+      "tag": "halalcraft:khaak_beads"
+    },
+    "S": {
+      "item": "minecraft:string"
+    },
+    "G": {
+      "item": "minecraft:
+    }
+  },
+  "result": {
+    "item": "halalcraft:tasbih"
+  }
+}

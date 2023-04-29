@@ -44,6 +44,6 @@ public class TasbihItem extends Item {
 
         user.getItemCooldownManager().set(this, 20 * 60);
 
-        return new TypedActionResult<>(ActionResult.SUCCESS, stack);
+        return TypedActionResult.success(stack, world.isClient()); // mirrored from enderpearlitem
     }
 }

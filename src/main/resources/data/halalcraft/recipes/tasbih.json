@@ -7,16 +7,17 @@
   ],
   "key": {
     "B": {
-      "tag": "halalcraft:khaak_beads"
+      "item": "halalcraft:khaak_beads"
     },
     "S": {
       "item": "minecraft:string"
     },
     "G": {
-      "item": "minecraft:
+      "tag": "halalcraft:gems"
     }
   },
   "result": {
-    "item": "halalcraft:tasbih"
+    "item": "halalcraft:tasbih",
+    "count": 1
   }
 }

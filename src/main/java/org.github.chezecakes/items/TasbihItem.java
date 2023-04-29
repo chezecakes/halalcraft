@@ -7,7 +7,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
@@ -15,6 +14,12 @@ import org.apache.commons.lang3.RandomUtils;
 
 import java.util.List;
 
+/*
+ * Grants a positive effect when used
+ * TODO: scale positive effect with piety
+ * FIXME: double effects on use, one effect does not go away (not even with /effect clear, only on relog)
+ * FIXME: recipe tags
+ */
 public class TasbihItem extends Item {
     private static final List<StatusEffect> effects;
 
@@ -32,6 +37,8 @@ public class TasbihItem extends Item {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        user.getItemCooldownManager().set(this, 20 * 60);
+
         var stack = user.getStackInHand(hand);
         var rand_idx = RandomUtils.nextInt(0, effects.size());
         var rand_effect = effects.get(rand_idx);
@@ -42,8 +49,6 @@ public class TasbihItem extends Item {
             stack.damage(1, user, x -> x.sendToolBreakStatus(hand));
         }
 
-        user.getItemCooldownManager().set(this, 20 * 60);
-
-        return TypedActionResult.success(stack, world.isClient()); // mirrored from enderpearlitem
+        return TypedActionResult.success(stack, world.isClient()); // mirrored from EnderPearlItem
     }
 }

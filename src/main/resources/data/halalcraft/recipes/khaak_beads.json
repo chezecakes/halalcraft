@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " K ",
+    "K K",
+    " K "
+  ],
+  "key": {
+    "K": {
+      "item": "halalcraft:khaak"
+    }
+  },
+  "result": {
+    "item": "halalcraft:khaak_beads",
+    "count": 4
+  }
+}

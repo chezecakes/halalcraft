@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " B ",
+    "BSB",
+    " BN"
+  ],
+  "key": {
+    "B": {
+      "item": "halalcraft:khaak_beads"
+    },
+    "S": {
+      "item": "minecraft:string"
+    },
+    "N": {
+      "item": "minecraft:nether_star"
+    }
+  },
+  "result": {
+    "item": "halalcraft:nether_star_tasbih",
+    "count": 1
+  }
+}

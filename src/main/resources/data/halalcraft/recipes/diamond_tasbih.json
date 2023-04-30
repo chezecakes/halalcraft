@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " B ",
+    "BSB",
+    " BD"
+  ],
+  "key": {
+    "B": {
+      "item": "halalcraft:khaak_beads"
+    },
+    "S": {
+      "item": "minecraft:string"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result": {
+    "item": "halalcraft:diamond_tasbih",
+    "count": 1
+  }
+}

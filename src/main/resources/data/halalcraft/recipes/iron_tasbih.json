@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " B ",
+    "BSB",
+    " BI"
+  ],
+  "key": {
+    "B": {
+      "item": "halalcraft:khaak_beads"
+    },
+    "S": {
+      "item": "minecraft:string"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "halalcraft:iron_tasbih",
+    "count": 1
+  }
+}

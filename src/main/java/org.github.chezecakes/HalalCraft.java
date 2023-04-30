@@ -5,8 +5,8 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.Block;
 import net.minecraft.block.Material;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -15,33 +15,47 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import org.github.chezecakes.blocks.LimestoneBlock;
 import org.github.chezecakes.blocks.MarbleBlock;
-import org.github.chezecakes.items.*;
+import org.github.chezecakes.items.KhaakBeadsItem;
+import org.github.chezecakes.items.KhaakItem;
+import org.github.chezecakes.items.SajdegahItem;
+import org.github.chezecakes.items.TasbihItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class HalalCraft implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger("halalcraft");
 
-    // items
-    public static final Item KHAAK = Registry.register(Registries.ITEM, new Identifier("halalcraft", "khaak"), new KhaakItem(new FabricItemSettings()));
-    public static final Item TASBIH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "tasbih"), new TasbihItem(new FabricItemSettings()));
-    public static final Item SAJDEGAH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "sajdegah"), new SajdegahItem(new FabricItemSettings()));
-    public static final Item KHAAK_BEADS = Registry.register(Registries.ITEM, new Identifier("halalcraft", "khaak_beads"), new KhaakBeadsItem(new FabricItemSettings()));
+    private static final Item KHAAK, TASBIH, SAJDEGAH, KHAAK_BEADS, LIMESTONE, MARBLE;
+    private static final ItemGroup HALALCRAFT_GROUP;
 
-    // blocks
-    public static final Block LIMESTONE = Registry.register(Registries.BLOCK, new Identifier("halalcraft", "limestone"), new LimestoneBlock(FabricBlockSettings.of(Material.STONE).strength(2.0f)));
-    public static final Block MARBLE = Registry.register(Registries.BLOCK, new Identifier("halalcraft", "marble"), new MarbleBlock(FabricBlockSettings.of(Material.STONE).strength(2.0f)));
+    static {
+        KHAAK = Registry.register(Registries.ITEM, new Identifier("halalcraft", "khaak"), new KhaakItem(new FabricItemSettings()));
+        TASBIH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "tasbih"), new TasbihItem(new FabricItemSettings()));
+        SAJDEGAH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "sajdegah"), new SajdegahItem(new FabricItemSettings()));
+        KHAAK_BEADS = Registry.register(Registries.ITEM, new Identifier("halalcraft", "khaak_beads"), new KhaakBeadsItem(new FabricItemSettings()));
 
-    private static final ItemGroup HALALCRAFT_GROUP = FabricItemGroup.builder(new Identifier("halalcraft", "halalcraft"))
-            .icon(() -> new ItemStack(TASBIH))
-            .build();
+        // todo: do we need a strong reference to these?
+        var limestone_block = new BlockItem(Registry.register(Registries.BLOCK, new Identifier("halalcraft", "limestone"), new LimestoneBlock(FabricBlockSettings.of(Material.STONE).strength(2.0f))), new FabricItemSettings());
+        var marble_block = new BlockItem(Registry.register(Registries.BLOCK, new Identifier("halalcraft", "marble"), new MarbleBlock(FabricBlockSettings.of(Material.STONE).strength(2.0f))), new FabricItemSettings());
+
+        var limestone_id = Registries.BLOCK.getId(limestone_block.getBlock());
+        var marble_id = Registries.BLOCK.getId(marble_block.getBlock());
+
+        // todo: why necessary? see Items.java, line 1280
+        limestone_block.appendBlocks(Item.BLOCK_ITEMS, limestone_block);
+        marble_block.appendBlocks(Item.BLOCK_ITEMS, marble_block);
+
+        LIMESTONE = Registry.register(Registries.ITEM, limestone_id, limestone_block);
+        MARBLE = Registry.register(Registries.ITEM, marble_id, marble_block);
+
+        HALALCRAFT_GROUP = FabricItemGroup.builder(new Identifier("halalcraft", "halalcraft"))
+                .icon(() -> new ItemStack(TASBIH))
+                .build();
+    }
 
     @Override
     public void onInitialize() {
         LOGGER.info("Registering items..");
-
-        Registry.register(Registries.ITEM, new Identifier("halalcraft", "limestone"), new LimestoneItem(LIMESTONE, new FabricItemSettings()));
-        Registry.register(Registries.ITEM, new Identifier("halalcraft", "marble"), new MarbleItem(MARBLE, new FabricItemSettings()));
 
         ItemGroupEvents.modifyEntriesEvent(HALALCRAFT_GROUP).register(content -> {
             content.add(KHAAK);

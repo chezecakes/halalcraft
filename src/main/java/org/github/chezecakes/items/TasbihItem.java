@@ -12,6 +12,7 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.apache.commons.lang3.RandomUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -20,24 +21,33 @@ import java.util.List;
  * FIXME: double effects on use, one effect does not go away (not even with /effect clear, only on relog)
  * FIXME: recipe tags
  */
-public class QuartzTasbihItem extends Item {
+public class TasbihItem extends Item {
     private static final List<StatusEffect> effects;
+
+    // todo: remove this logic in favor of better cooldown handling
+    private static final List<TasbihItem> tasbih_inst;
 
     static {
         effects = Registries.STATUS_EFFECT
                 .stream()
                 .filter(x -> x.getCategory() == StatusEffectCategory.BENEFICIAL)
                 .toList();
+
+        tasbih_inst = new ArrayList<>();
     }
 
-    public QuartzTasbihItem(Settings settings) {
+    public TasbihItem(Settings settings) {
         super(settings);
+
+        tasbih_inst.add(this);
     }
 
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        user.getItemCooldownManager().set(this, 20 * 60);
+        for (var inst : tasbih_inst) {
+            user.getItemCooldownManager().set(inst, 20 * 60);
+        }
 
         var stack = user.getStackInHand(hand);
         var rand_idx = RandomUtils.nextInt(0, effects.size());

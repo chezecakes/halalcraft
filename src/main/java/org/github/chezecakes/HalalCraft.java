@@ -15,30 +15,28 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import org.github.chezecakes.blocks.LimestoneBlock;
 import org.github.chezecakes.blocks.MarbleBlock;
-import org.github.chezecakes.items.*;
+import org.github.chezecakes.items.KhaakBeadsItem;
+import org.github.chezecakes.items.KhaakItem;
+import org.github.chezecakes.items.SajdegahItem;
+import org.github.chezecakes.items.TasbihItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/*
-todo:
-- add a way to templock all tasbih variants when a user uses one tasbih
-
-*/
 public class HalalCraft implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger("halalcraft");
 
-    private static final Item KHAAK, GOLD_TASBIH, DIAMOND_TASBIH, EMERALD_TASBIH, IRON_TASBIH, QUARTZ_TASBIH, AMETHYST_TASBIH, NETHER_STAR_TASBIH, SAJDEGAH, KHAAK_BEADS, LIMESTONE, MARBLE;
+    private static final Item KHAAK, IRON_TASBIH, GOLD_TASBIH, DIAMOND_TASBIH, EMERALD_TASBIH, QUARTZ_TASBIH, AMETHYST_TASBIH, NETHER_STAR_TASBIH, SAJDEGAH, KHAAK_BEADS, LIMESTONE, MARBLE;
     private static final ItemGroup HALALCRAFT_GROUP;
 
     static {
         KHAAK = Registry.register(Registries.ITEM, new Identifier("halalcraft", "khaak"), new KhaakItem(new FabricItemSettings()));
-        IRON_TASBIH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "iron_tasbih"), new IronTasbihItem(new FabricItemSettings()));
-        GOLD_TASBIH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "gold_tasbih"), new GoldTasbihItem(new FabricItemSettings()));
-        DIAMOND_TASBIH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "diamond_tasbih"), new DiamondTasbihItem(new FabricItemSettings()));
-        EMERALD_TASBIH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "emerald_tasbih"), new EmeraldTasbihItem(new FabricItemSettings()));
-        QUARTZ_TASBIH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "quartz_tasbih"), new QuartzTasbihItem(new FabricItemSettings()));
-        AMETHYST_TASBIH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "amethyst_tasbih"), new AmethystTasbihItem(new FabricItemSettings()));
-        NETHER_STAR_TASBIH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "nether_star_tasbih"), new NetherStarTasbihItem(new FabricItemSettings()));
+        IRON_TASBIH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "iron_tasbih"), new TasbihItem(new FabricItemSettings()));
+        GOLD_TASBIH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "gold_tasbih"), new TasbihItem(new FabricItemSettings()));
+        DIAMOND_TASBIH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "diamond_tasbih"), new TasbihItem(new FabricItemSettings()));
+        EMERALD_TASBIH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "emerald_tasbih"), new TasbihItem(new FabricItemSettings()));
+        QUARTZ_TASBIH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "quartz_tasbih"), new TasbihItem(new FabricItemSettings()));
+        AMETHYST_TASBIH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "amethyst_tasbih"), new TasbihItem(new FabricItemSettings()));
+        NETHER_STAR_TASBIH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "nether_star_tasbih"), new TasbihItem(new FabricItemSettings()));
         SAJDEGAH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "sajdegah"), new SajdegahItem(new FabricItemSettings()));
         KHAAK_BEADS = Registry.register(Registries.ITEM, new Identifier("halalcraft", "khaak_beads"), new KhaakBeadsItem(new FabricItemSettings()));
 

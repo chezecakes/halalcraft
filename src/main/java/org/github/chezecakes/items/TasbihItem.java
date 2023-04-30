@@ -57,7 +57,7 @@ public class TasbihItem extends Item {
             user.addStatusEffect(new StatusEffectInstance(rand_effect, 20 * 30, 1)); // 20 ticks = 1 second, * 30 = 30 seconds
         }
 
-        if (!user.getAbilities().creativeMode) {
+        if (!user.isCreative()) {
             stack.damage(1, user, x -> x.sendToolBreakStatus(hand));
         }
 

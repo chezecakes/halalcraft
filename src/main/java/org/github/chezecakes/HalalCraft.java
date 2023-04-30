@@ -6,10 +6,7 @@ import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Material;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -30,13 +27,13 @@ public class HalalCraft implements ModInitializer {
 
     static {
         KHAAK = Registry.register(Registries.ITEM, new Identifier("halalcraft", "khaak"), new KhaakItem(new FabricItemSettings()));
-        IRON_TASBIH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "iron_tasbih"), new TasbihItem(new FabricItemSettings()));
-        GOLD_TASBIH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "gold_tasbih"), new TasbihItem(new FabricItemSettings()));
-        DIAMOND_TASBIH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "diamond_tasbih"), new TasbihItem(new FabricItemSettings()));
-        EMERALD_TASBIH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "emerald_tasbih"), new TasbihItem(new FabricItemSettings()));
-        QUARTZ_TASBIH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "quartz_tasbih"), new TasbihItem(new FabricItemSettings()));
-        AMETHYST_TASBIH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "amethyst_tasbih"), new TasbihItem(new FabricItemSettings()));
-        NETHER_STAR_TASBIH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "nether_star_tasbih"), new TasbihItem(new FabricItemSettings()));
+        IRON_TASBIH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "iron_tasbih"), new TasbihItem());
+        GOLD_TASBIH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "gold_tasbih"), new TasbihItem());
+        DIAMOND_TASBIH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "diamond_tasbih"), new TasbihItem());
+        EMERALD_TASBIH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "emerald_tasbih"), new TasbihItem());
+        QUARTZ_TASBIH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "quartz_tasbih"), new TasbihItem());
+        AMETHYST_TASBIH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "amethyst_tasbih"), new TasbihItem());
+        NETHER_STAR_TASBIH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "nether_star_tasbih"), new TasbihItem());
         SAJDEGAH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "sajdegah"), new SajdegahItem(new FabricItemSettings()));
         KHAAK_BEADS = Registry.register(Registries.ITEM, new Identifier("halalcraft", "khaak_beads"), new KhaakBeadsItem(new FabricItemSettings()));
 
@@ -55,7 +52,7 @@ public class HalalCraft implements ModInitializer {
         MARBLE = Registry.register(Registries.ITEM, marble_id, marble_block);
 
         HALALCRAFT_GROUP = FabricItemGroup.builder(new Identifier("halalcraft", "halalcraft"))
-                .icon(() -> new ItemStack(GOLD_TASBIH))
+                .icon(() -> new ItemStack(Items.BOOK))
                 .build();
     }
 

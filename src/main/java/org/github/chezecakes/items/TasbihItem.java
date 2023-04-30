@@ -1,5 +1,6 @@
 package org.github.chezecakes.items;
 
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -18,8 +19,7 @@ import java.util.List;
 /*
  * Grants a positive effect when used
  * TODO: scale positive effect with piety
- * FIXME: double effects on use, one effect does not go away (not even with /effect clear, only on relog)
- * FIXME: recipe tags
+ * FIXME: amplifier not correctly set (once got saturation 2)
  */
 public class TasbihItem extends Item {
     private static final List<StatusEffect> effects;
@@ -36,8 +36,8 @@ public class TasbihItem extends Item {
         tasbih_inst = new ArrayList<>();
     }
 
-    public TasbihItem(Settings settings) {
-        super(settings);
+    public TasbihItem() {
+        super(new FabricItemSettings().maxCount(1));
 
         tasbih_inst.add(this);
     }
@@ -53,7 +53,9 @@ public class TasbihItem extends Item {
         var rand_idx = RandomUtils.nextInt(0, effects.size());
         var rand_effect = effects.get(rand_idx);
 
-        user.addStatusEffect(new StatusEffectInstance(rand_effect, 20 * 30, 1)); // 20 ticks = 1 second, * 30 = 30 seconds
+        if (!world.isClient()) {
+            user.addStatusEffect(new StatusEffectInstance(rand_effect, 20 * 30, 1)); // 20 ticks = 1 second, * 30 = 30 seconds
+        }
 
         if (!user.getAbilities().creativeMode) {
             stack.damage(1, user, x -> x.sendToolBreakStatus(hand));

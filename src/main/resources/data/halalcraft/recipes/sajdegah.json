@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "halalcraft:khaak"
+  },
+  "result": "halalcraft:sajdegah",
+  "count": 1
+}

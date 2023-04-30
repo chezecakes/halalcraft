@@ -12,9 +12,9 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import org.github.chezecakes.blocks.LimestoneBlock;
 import org.github.chezecakes.blocks.MarbleBlock;
+import org.github.chezecakes.blocks.SajdegahBlock;
 import org.github.chezecakes.items.KhaakBeadsItem;
 import org.github.chezecakes.items.KhaakItem;
-import org.github.chezecakes.items.SajdegahItem;
 import org.github.chezecakes.items.TasbihItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 public class HalalCraft implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger("halalcraft");
 
-    private static final Item KHAAK, IRON_TASBIH, GOLD_TASBIH, DIAMOND_TASBIH, EMERALD_TASBIH, QUARTZ_TASBIH, AMETHYST_TASBIH, NETHER_STAR_TASBIH, SAJDEGAH, KHAAK_BEADS, LIMESTONE, MARBLE;
+    private static final Item KHAAK, IRON_TASBIH, GOLD_TASBIH, DIAMOND_TASBIH, EMERALD_TASBIH, QUARTZ_TASBIH, AMETHYST_TASBIH, NETHER_STAR_TASBIH, KHAAK_BEADS, SAJDEGAH, LIMESTONE, MARBLE;
     private static final ItemGroup HALALCRAFT_GROUP;
 
     static {
@@ -34,20 +34,23 @@ public class HalalCraft implements ModInitializer {
         QUARTZ_TASBIH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "quartz_tasbih"), new TasbihItem());
         AMETHYST_TASBIH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "amethyst_tasbih"), new TasbihItem());
         NETHER_STAR_TASBIH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "nether_star_tasbih"), new TasbihItem());
-        SAJDEGAH = Registry.register(Registries.ITEM, new Identifier("halalcraft", "sajdegah"), new SajdegahItem(new FabricItemSettings()));
         KHAAK_BEADS = Registry.register(Registries.ITEM, new Identifier("halalcraft", "khaak_beads"), new KhaakBeadsItem(new FabricItemSettings()));
 
         // todo: do we need a strong reference to these?
+        var sajdegah_block = new BlockItem(Registry.register(Registries.BLOCK, new Identifier("halalcraft", "sajdegah"), new SajdegahBlock()), new FabricItemSettings());
         var limestone_block = new BlockItem(Registry.register(Registries.BLOCK, new Identifier("halalcraft", "limestone"), new LimestoneBlock(FabricBlockSettings.of(Material.STONE).strength(2.0f))), new FabricItemSettings());
         var marble_block = new BlockItem(Registry.register(Registries.BLOCK, new Identifier("halalcraft", "marble"), new MarbleBlock(FabricBlockSettings.of(Material.STONE).strength(2.0f))), new FabricItemSettings());
 
+        var sajdegah_id = Registries.BLOCK.getId(sajdegah_block.getBlock());
         var limestone_id = Registries.BLOCK.getId(limestone_block.getBlock());
         var marble_id = Registries.BLOCK.getId(marble_block.getBlock());
 
         // todo: why necessary? see Items.java, line 1280
+        sajdegah_block.appendBlocks(Item.BLOCK_ITEMS, sajdegah_block);
         limestone_block.appendBlocks(Item.BLOCK_ITEMS, limestone_block);
         marble_block.appendBlocks(Item.BLOCK_ITEMS, marble_block);
 
+        SAJDEGAH = Registry.register(Registries.ITEM, sajdegah_id, sajdegah_block);
         LIMESTONE = Registry.register(Registries.ITEM, limestone_id, limestone_block);
         MARBLE = Registry.register(Registries.ITEM, marble_id, marble_block);
 
@@ -69,8 +72,8 @@ public class HalalCraft implements ModInitializer {
             content.add(QUARTZ_TASBIH);
             content.add(AMETHYST_TASBIH);
             content.add(NETHER_STAR_TASBIH);
-            content.add(SAJDEGAH);
             content.add(KHAAK_BEADS);
+            content.add(SAJDEGAH);
             content.add(LIMESTONE);
             content.add(MARBLE);
         });

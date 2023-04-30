@@ -37,7 +37,7 @@ public class TasbihItem extends Item {
     }
 
     public TasbihItem() {
-        super(new FabricItemSettings().maxCount(1));
+        super(new FabricItemSettings().maxCount(1).maxDamage(16));
 
         tasbih_inst.add(this);
     }
